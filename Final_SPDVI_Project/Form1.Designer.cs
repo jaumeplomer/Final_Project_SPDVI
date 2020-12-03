@@ -46,17 +46,19 @@
             this.textBoxFindByName = new System.Windows.Forms.TextBox();
             this.labelFindByName = new System.Windows.Forms.Label();
             this.groupBoxFilters = new System.Windows.Forms.GroupBox();
+            this.buttonLoadData = new System.Windows.Forms.Button();
             this.groupBoxFilters.SuspendLayout();
             this.SuspendLayout();
             // 
             // productsListBox
             // 
             this.productsListBox.FormattingEnabled = true;
+            this.productsListBox.HorizontalScrollbar = true;
             this.productsListBox.ItemHeight = 16;
             this.productsListBox.Location = new System.Drawing.Point(302, 14);
             this.productsListBox.Name = "productsListBox";
             this.productsListBox.ScrollAlwaysVisible = true;
-            this.productsListBox.Size = new System.Drawing.Size(600, 484);
+            this.productsListBox.Size = new System.Drawing.Size(600, 420);
             this.productsListBox.TabIndex = 0;
             // 
             // comboBoxCategoria
@@ -220,11 +222,22 @@
             this.groupBoxFilters.TabStop = false;
             this.groupBoxFilters.Text = "Filters:";
             // 
+            // buttonLoadData
+            // 
+            this.buttonLoadData.Location = new System.Drawing.Point(339, 476);
+            this.buttonLoadData.Name = "buttonLoadData";
+            this.buttonLoadData.Size = new System.Drawing.Size(158, 59);
+            this.buttonLoadData.TabIndex = 18;
+            this.buttonLoadData.Text = "Load Data";
+            this.buttonLoadData.UseVisualStyleBackColor = true;
+            this.buttonLoadData.Click += new System.EventHandler(this.buttonLoadData_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(914, 582);
+            this.Controls.Add(this.buttonLoadData);
             this.Controls.Add(this.groupBoxFilters);
             this.Controls.Add(this.productsListBox);
             this.Name = "Form1";
@@ -255,6 +268,7 @@
         private System.Windows.Forms.TextBox textBoxFindByName;
         private System.Windows.Forms.Label labelFindByName;
         private System.Windows.Forms.GroupBox groupBoxFilters;
+        private System.Windows.Forms.Button buttonLoadData;
     }
 }
 

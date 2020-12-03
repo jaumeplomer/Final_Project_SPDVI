@@ -17,6 +17,15 @@ namespace Final_SPDVI_Project
             InitializeComponent();
         }
 
-        
+        private void buttonLoadData_Click(object sender, EventArgs e)
+        {
+            //productsListBox.Items = DataAccess.GetModels();
+            List<Model> models = new List<Model>();
+            models = DataAccess.GetModels();
+            foreach (Model model in models)
+            {
+                productsListBox.Items.Add(model.ToString());
+            }
+        }
     }
 }
