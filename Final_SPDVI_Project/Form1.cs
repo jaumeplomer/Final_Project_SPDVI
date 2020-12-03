@@ -17,9 +17,26 @@ namespace Final_SPDVI_Project
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            List<String> categories = new List<string>();
+            categories = DataAccess.getCategories();
+            foreach (String categoria in categories)
+            {
+                comboBoxCategoria.Items.Add(categoria);
+            }
+
+            List<String> subcategories = new List<string>();
+            subcategories = DataAccess.getSubCategories();
+            foreach (String subcategoria in subcategories)
+            {
+                comboBoxSubCategoria.Items.Add(subcategoria);
+            }
+        }
+
         private void buttonLoadData_Click(object sender, EventArgs e)
         {
-            //productsListBox.Items = DataAccess.GetModels();
+            productsListBox.Items.Clear();
             List<Model> models = new List<Model>();
             models = DataAccess.GetModels();
             foreach (Model model in models)

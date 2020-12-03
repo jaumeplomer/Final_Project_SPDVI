@@ -226,9 +226,9 @@
             // 
             this.buttonLoadData.Location = new System.Drawing.Point(339, 476);
             this.buttonLoadData.Name = "buttonLoadData";
-            this.buttonLoadData.Size = new System.Drawing.Size(158, 59);
+            this.buttonLoadData.Size = new System.Drawing.Size(185, 59);
             this.buttonLoadData.TabIndex = 18;
-            this.buttonLoadData.Text = "Load Data";
+            this.buttonLoadData.Text = "Load Data / Apply Filters";
             this.buttonLoadData.UseVisualStyleBackColor = true;
             this.buttonLoadData.Click += new System.EventHandler(this.buttonLoadData_Click);
             // 
@@ -242,6 +242,7 @@
             this.Controls.Add(this.productsListBox);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBoxFilters.ResumeLayout(false);
             this.groupBoxFilters.PerformLayout();
             this.ResumeLayout(false);
