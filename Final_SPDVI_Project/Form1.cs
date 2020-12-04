@@ -17,6 +17,8 @@ namespace Final_SPDVI_Project
     {
         public static string connectionString = ConfigurationManager.ConnectionStrings["AdventureWorksDB"].ConnectionString;
         public static string language = "en";
+        public static float min = 0;
+        public static float max = 4000;
         public listViewProducts()
         {
             InitializeComponent();
@@ -256,6 +258,40 @@ namespace Final_SPDVI_Project
             }
         }
 
+        private void minPriceTextBox_TextChanged(object sender, EventArgs e)
+        {
+            min = float.Parse(minPriceTextBox.Text);
+        }
+
+        private void maxPriceTextBox_TextChanged(object sender, EventArgs e)
+        {
+            max = float.Parse(maxPriceTextBox.Text);
+        }
+
+        private void applyPriceFilterButton_Click(object sender, EventArgs e)
+        {
+            listView1.Items.Clear();
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                List<Model> models = new List<Model>();
+                string sql = $@"SELECT DISTINCT
+                            Production.ProductModel.Name, Production.ProductDescription.Description, Production.Product.ListPrice
+                            FROM Production.Product
+                            INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID
+                            INNER JOIN Production.ProductCategory ON Production.ProductSubcategory.ProductCategoryID = Production.ProductCategory.ProductCategoryID
+                            INNER JOIN Production.ProductModel ON Production.Product.ProductModelID = Production.ProductModel.ProductModelID
+                            INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID
+                            INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID
+                            WHERE Production.ProductSubcategory.Name = '{comboBoxSubCategoria.SelectedItem}' AND ProductModelProductDescriptionCulture.CultureID = '{language}'
+                            AND Production.Product.ListPrice BETWEEN {min} AND {max}";
+                models = connection.Query<Model>(sql).ToList();
+                foreach (Model model in models)
+                {
+                    listView1.Items.Add(model.ToString());
+                }
+            }
+        }
+
         public static List<Model> GetModels()
         {
             using (IDbConnection connection = new SqlConnection(connectionString))
@@ -366,5 +402,6 @@ namespace Final_SPDVI_Project
                 return classes;
             }
         }
+
     }
 }

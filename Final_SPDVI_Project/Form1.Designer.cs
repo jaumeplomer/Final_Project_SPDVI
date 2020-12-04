@@ -41,7 +41,6 @@
             this.labelStyle = new System.Windows.Forms.Label();
             this.comboBoxStyle = new System.Windows.Forms.ComboBox();
             this.labelListPrice = new System.Windows.Forms.Label();
-            this.comboBoxListPrice = new System.Windows.Forms.ComboBox();
             this.textBoxFindByName = new System.Windows.Forms.TextBox();
             this.labelFindByName = new System.Windows.Forms.Label();
             this.groupBoxFilters = new System.Windows.Forms.GroupBox();
@@ -50,6 +49,11 @@
             this.labelLanguage = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
             this.PRODUCTS = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.minPriceTextBox = new System.Windows.Forms.TextBox();
+            this.minPriceLabel = new System.Windows.Forms.Label();
+            this.maxPriceLabel = new System.Windows.Forms.Label();
+            this.maxPriceTextBox = new System.Windows.Forms.TextBox();
+            this.applyPriceFilterButton = new System.Windows.Forms.Button();
             this.groupBoxFilters.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -164,23 +168,15 @@
             // labelListPrice
             // 
             this.labelListPrice.AutoSize = true;
-            this.labelListPrice.Location = new System.Drawing.Point(21, 367);
+            this.labelListPrice.Location = new System.Drawing.Point(18, 369);
             this.labelListPrice.Name = "labelListPrice";
             this.labelListPrice.Size = new System.Drawing.Size(66, 17);
             this.labelListPrice.TabIndex = 14;
             this.labelListPrice.Text = "ListPrice:";
             // 
-            // comboBoxListPrice
-            // 
-            this.comboBoxListPrice.FormattingEnabled = true;
-            this.comboBoxListPrice.Location = new System.Drawing.Point(21, 390);
-            this.comboBoxListPrice.Name = "comboBoxListPrice";
-            this.comboBoxListPrice.Size = new System.Drawing.Size(121, 24);
-            this.comboBoxListPrice.TabIndex = 13;
-            // 
             // textBoxFindByName
             // 
-            this.textBoxFindByName.Location = new System.Drawing.Point(21, 464);
+            this.textBoxFindByName.Location = new System.Drawing.Point(21, 482);
             this.textBoxFindByName.Name = "textBoxFindByName";
             this.textBoxFindByName.Size = new System.Drawing.Size(171, 22);
             this.textBoxFindByName.TabIndex = 15;
@@ -188,7 +184,7 @@
             // labelFindByName
             // 
             this.labelFindByName.AutoSize = true;
-            this.labelFindByName.Location = new System.Drawing.Point(21, 441);
+            this.labelFindByName.Location = new System.Drawing.Point(21, 462);
             this.labelFindByName.Name = "labelFindByName";
             this.labelFindByName.Size = new System.Drawing.Size(97, 17);
             this.labelFindByName.TabIndex = 16;
@@ -197,6 +193,11 @@
             // groupBoxFilters
             // 
             this.groupBoxFilters.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.groupBoxFilters.Controls.Add(this.applyPriceFilterButton);
+            this.groupBoxFilters.Controls.Add(this.maxPriceLabel);
+            this.groupBoxFilters.Controls.Add(this.maxPriceTextBox);
+            this.groupBoxFilters.Controls.Add(this.minPriceLabel);
+            this.groupBoxFilters.Controls.Add(this.minPriceTextBox);
             this.groupBoxFilters.Controls.Add(this.comboBoxCategoria);
             this.groupBoxFilters.Controls.Add(this.labelFindByName);
             this.groupBoxFilters.Controls.Add(this.labelCategoria);
@@ -204,7 +205,6 @@
             this.groupBoxFilters.Controls.Add(this.comboBoxSubCategoria);
             this.groupBoxFilters.Controls.Add(this.labelListPrice);
             this.groupBoxFilters.Controls.Add(this.labelSubCategoria);
-            this.groupBoxFilters.Controls.Add(this.comboBoxListPrice);
             this.groupBoxFilters.Controls.Add(this.comboBoxSize);
             this.groupBoxFilters.Controls.Add(this.labelStyle);
             this.groupBoxFilters.Controls.Add(this.labelSize);
@@ -270,6 +270,51 @@
             this.PRODUCTS.Text = "PRODUCTS:";
             this.PRODUCTS.Width = 600;
             // 
+            // minPriceTextBox
+            // 
+            this.minPriceTextBox.Location = new System.Drawing.Point(21, 406);
+            this.minPriceTextBox.Name = "minPriceTextBox";
+            this.minPriceTextBox.Size = new System.Drawing.Size(63, 22);
+            this.minPriceTextBox.TabIndex = 17;
+            this.minPriceTextBox.TextChanged += new System.EventHandler(this.minPriceTextBox_TextChanged);
+            // 
+            // minPriceLabel
+            // 
+            this.minPriceLabel.AutoSize = true;
+            this.minPriceLabel.Location = new System.Drawing.Point(18, 386);
+            this.minPriceLabel.Name = "minPriceLabel";
+            this.minPriceLabel.Size = new System.Drawing.Size(34, 17);
+            this.minPriceLabel.TabIndex = 18;
+            this.minPriceLabel.Text = "Min.";
+            // 
+            // maxPriceLabel
+            // 
+            this.maxPriceLabel.AutoSize = true;
+            this.maxPriceLabel.Location = new System.Drawing.Point(90, 386);
+            this.maxPriceLabel.Name = "maxPriceLabel";
+            this.maxPriceLabel.Size = new System.Drawing.Size(37, 17);
+            this.maxPriceLabel.TabIndex = 20;
+            this.maxPriceLabel.Text = "Max.";
+            // 
+            // maxPriceTextBox
+            // 
+            this.maxPriceTextBox.Location = new System.Drawing.Point(90, 406);
+            this.maxPriceTextBox.Name = "maxPriceTextBox";
+            this.maxPriceTextBox.Size = new System.Drawing.Size(65, 22);
+            this.maxPriceTextBox.TabIndex = 19;
+            this.maxPriceTextBox.TextChanged += new System.EventHandler(this.maxPriceTextBox_TextChanged);
+            // 
+            // applyPriceFilterButton
+            // 
+            this.applyPriceFilterButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.applyPriceFilterButton.Location = new System.Drawing.Point(161, 386);
+            this.applyPriceFilterButton.Name = "applyPriceFilterButton";
+            this.applyPriceFilterButton.Size = new System.Drawing.Size(75, 42);
+            this.applyPriceFilterButton.TabIndex = 21;
+            this.applyPriceFilterButton.Text = "Apply";
+            this.applyPriceFilterButton.UseVisualStyleBackColor = false;
+            this.applyPriceFilterButton.Click += new System.EventHandler(this.applyPriceFilterButton_Click);
+            // 
             // listViewProducts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -303,7 +348,6 @@
         private System.Windows.Forms.Label labelStyle;
         private System.Windows.Forms.ComboBox comboBoxStyle;
         private System.Windows.Forms.Label labelListPrice;
-        private System.Windows.Forms.ComboBox comboBoxListPrice;
         private System.Windows.Forms.TextBox textBoxFindByName;
         private System.Windows.Forms.Label labelFindByName;
         private System.Windows.Forms.GroupBox groupBoxFilters;
@@ -312,6 +356,11 @@
         private System.Windows.Forms.Label labelLanguage;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader PRODUCTS;
+        private System.Windows.Forms.Label maxPriceLabel;
+        private System.Windows.Forms.TextBox maxPriceTextBox;
+        private System.Windows.Forms.Label minPriceLabel;
+        private System.Windows.Forms.TextBox minPriceTextBox;
+        private System.Windows.Forms.Button applyPriceFilterButton;
     }
 }
 
