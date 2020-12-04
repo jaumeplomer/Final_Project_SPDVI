@@ -105,6 +105,7 @@
             this.comboBoxSize.Name = "comboBoxSize";
             this.comboBoxSize.Size = new System.Drawing.Size(121, 24);
             this.comboBoxSize.TabIndex = 5;
+            this.comboBoxSize.SelectedIndexChanged += new System.EventHandler(this.comboBoxSize_SelectedIndexChanged);
             // 
             // labelProductLine
             // 
@@ -122,6 +123,7 @@
             this.comboBoxProductLine.Name = "comboBoxProductLine";
             this.comboBoxProductLine.Size = new System.Drawing.Size(121, 24);
             this.comboBoxProductLine.TabIndex = 7;
+            this.comboBoxProductLine.SelectedIndexChanged += new System.EventHandler(this.comboBoxProductLine_SelectedIndexChanged);
             // 
             // labelClass
             // 
@@ -139,6 +141,7 @@
             this.comboBoxClass.Name = "comboBoxClass";
             this.comboBoxClass.Size = new System.Drawing.Size(121, 24);
             this.comboBoxClass.TabIndex = 9;
+            this.comboBoxClass.SelectedIndexChanged += new System.EventHandler(this.comboBoxClass_SelectedIndexChanged);
             // 
             // labelStyle
             // 
@@ -156,6 +159,7 @@
             this.comboBoxStyle.Name = "comboBoxStyle";
             this.comboBoxStyle.Size = new System.Drawing.Size(121, 24);
             this.comboBoxStyle.TabIndex = 11;
+            this.comboBoxStyle.SelectedIndexChanged += new System.EventHandler(this.comboBoxStyle_SelectedIndexChanged);
             // 
             // labelListPrice
             // 
@@ -222,7 +226,7 @@
             this.buttonLoadData.Name = "buttonLoadData";
             this.buttonLoadData.Size = new System.Drawing.Size(185, 59);
             this.buttonLoadData.TabIndex = 18;
-            this.buttonLoadData.Text = "Load Data";
+            this.buttonLoadData.Text = "Load All Data";
             this.buttonLoadData.UseVisualStyleBackColor = true;
             this.buttonLoadData.Click += new System.EventHandler(this.buttonLoadData_Click);
             // 
