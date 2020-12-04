@@ -1,6 +1,6 @@
 ﻿namespace Final_SPDVI_Project
 {
-    partial class Form1
+    partial class listViewProducts
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.productsListBox = new System.Windows.Forms.ListBox();
             this.comboBoxCategoria = new System.Windows.Forms.ComboBox();
             this.labelCategoria = new System.Windows.Forms.Label();
             this.labelSubCategoria = new System.Windows.Forms.Label();
@@ -47,19 +46,12 @@
             this.labelFindByName = new System.Windows.Forms.Label();
             this.groupBoxFilters = new System.Windows.Forms.GroupBox();
             this.buttonLoadData = new System.Windows.Forms.Button();
+            this.comboBoxLanguage = new System.Windows.Forms.ComboBox();
+            this.labelLanguage = new System.Windows.Forms.Label();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.PRODUCTS = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBoxFilters.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // productsListBox
-            // 
-            this.productsListBox.FormattingEnabled = true;
-            this.productsListBox.HorizontalScrollbar = true;
-            this.productsListBox.ItemHeight = 16;
-            this.productsListBox.Location = new System.Drawing.Point(302, 14);
-            this.productsListBox.Name = "productsListBox";
-            this.productsListBox.ScrollAlwaysVisible = true;
-            this.productsListBox.Size = new System.Drawing.Size(600, 420);
-            this.productsListBox.TabIndex = 0;
             // 
             // comboBoxCategoria
             // 
@@ -68,6 +60,7 @@
             this.comboBoxCategoria.Name = "comboBoxCategoria";
             this.comboBoxCategoria.Size = new System.Drawing.Size(121, 24);
             this.comboBoxCategoria.TabIndex = 1;
+            this.comboBoxCategoria.SelectedIndexChanged += new System.EventHandler(this.comboBoxCategoria_SelectedIndexChanged);
             // 
             // labelCategoria
             // 
@@ -94,6 +87,7 @@
             this.comboBoxSubCategoria.Name = "comboBoxSubCategoria";
             this.comboBoxSubCategoria.Size = new System.Drawing.Size(121, 24);
             this.comboBoxSubCategoria.TabIndex = 3;
+            this.comboBoxSubCategoria.SelectedIndexChanged += new System.EventHandler(this.comboBoxSubCategoria_SelectedIndexChanged);
             // 
             // labelSize
             // 
@@ -224,34 +218,74 @@
             // 
             // buttonLoadData
             // 
-            this.buttonLoadData.Location = new System.Drawing.Point(339, 476);
+            this.buttonLoadData.Location = new System.Drawing.Point(302, 476);
             this.buttonLoadData.Name = "buttonLoadData";
             this.buttonLoadData.Size = new System.Drawing.Size(185, 59);
             this.buttonLoadData.TabIndex = 18;
-            this.buttonLoadData.Text = "Load Data / Apply Filters";
+            this.buttonLoadData.Text = "Load Data";
             this.buttonLoadData.UseVisualStyleBackColor = true;
             this.buttonLoadData.Click += new System.EventHandler(this.buttonLoadData_Click);
             // 
-            // Form1
+            // comboBoxLanguage
+            // 
+            this.comboBoxLanguage.FormattingEnabled = true;
+            this.comboBoxLanguage.Items.AddRange(new object[] {
+            "en",
+            "fr"});
+            this.comboBoxLanguage.Location = new System.Drawing.Point(377, 12);
+            this.comboBoxLanguage.Name = "comboBoxLanguage";
+            this.comboBoxLanguage.Size = new System.Drawing.Size(121, 24);
+            this.comboBoxLanguage.TabIndex = 19;
+            this.comboBoxLanguage.SelectedIndexChanged += new System.EventHandler(this.comboBoxLanguage_SelectedIndexChanged);
+            // 
+            // labelLanguage
+            // 
+            this.labelLanguage.AutoSize = true;
+            this.labelLanguage.Location = new System.Drawing.Point(299, 19);
+            this.labelLanguage.Name = "labelLanguage";
+            this.labelLanguage.Size = new System.Drawing.Size(72, 17);
+            this.labelLanguage.TabIndex = 20;
+            this.labelLanguage.Text = "Language";
+            // 
+            // listView1
+            // 
+            this.listView1.Alignment = System.Windows.Forms.ListViewAlignment.Left;
+            this.listView1.AutoArrange = false;
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.PRODUCTS});
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(302, 57);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(600, 413);
+            this.listView1.TabIndex = 21;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // PRODUCTS
+            // 
+            this.PRODUCTS.Text = "PRODUCTS:";
+            this.PRODUCTS.Width = 600;
+            // 
+            // listViewProducts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(914, 582);
+            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.labelLanguage);
+            this.Controls.Add(this.comboBoxLanguage);
             this.Controls.Add(this.buttonLoadData);
             this.Controls.Add(this.groupBoxFilters);
-            this.Controls.Add(this.productsListBox);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "listViewProducts";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBoxFilters.ResumeLayout(false);
             this.groupBoxFilters.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox productsListBox;
         private System.Windows.Forms.ComboBox comboBoxCategoria;
         private System.Windows.Forms.Label labelCategoria;
         private System.Windows.Forms.Label labelSubCategoria;
@@ -270,6 +304,10 @@
         private System.Windows.Forms.Label labelFindByName;
         private System.Windows.Forms.GroupBox groupBoxFilters;
         private System.Windows.Forms.Button buttonLoadData;
+        private System.Windows.Forms.ComboBox comboBoxLanguage;
+        private System.Windows.Forms.Label labelLanguage;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader PRODUCTS;
     }
 }
 
