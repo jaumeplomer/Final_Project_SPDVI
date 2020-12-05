@@ -4,10 +4,12 @@
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public string SellStartDate { get; set; }
+        public string SellEndDate { get; set; }
 
         public override string ToString()
         {
-            return $"{Name} - {Description}";
+            return $"{Name} , {Description}, {SellStartDate}, {SellEndDate}";
         }
     }
 }

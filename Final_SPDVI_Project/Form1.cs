@@ -19,9 +19,11 @@ namespace Final_SPDVI_Project
         public static string language = "en";
         public static float min = 0;
         public static float max = 4000;
-        public listViewProducts()
+        public static string onlyAvailableSql = "";
+        public static string extraInfo = "";
+        public listViewProducts() 
         {
-            InitializeComponent();
+            InitializeComponent(); 
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -43,7 +45,13 @@ namespace Final_SPDVI_Project
             foreach (Model model in models)
             {
                 listView1.Items.Add(model.ToString());
-            }        
+            }
+            comboBoxCategoria.Text = "";
+            comboBoxSubCategoria.Text = "";
+            comboBoxStyle.Text = "";
+            comboBoxSize.Text = "";
+            comboBoxProductLine.Text = "";
+            comboBoxClass.Text = "";
         }
 
         private void comboBoxLanguage_SelectedIndexChanged(object sender, EventArgs e)
@@ -58,7 +66,7 @@ namespace Final_SPDVI_Project
             {
                 List<Model> models = new List<Model>();
                 string sql = $@"SELECT DISTINCT
-                            Production.ProductModel.Name, Production.ProductDescription.Description
+                            Production.ProductModel.Name, Production.ProductDescription.Description{extraInfo}
                             FROM
                             Production.Product
                             INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID
@@ -66,7 +74,7 @@ namespace Final_SPDVI_Project
                             INNER JOIN Production.ProductModel ON Production.Product.ProductModelID = Production.ProductModel.ProductModelID
                             INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID
                             INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID
-                            WHERE Production.ProductCategory.Name = '{comboBoxCategoria.SelectedItem}' AND ProductModelProductDescriptionCulture.CultureID = '{language}'";
+                            WHERE Production.ProductCategory.Name = '{comboBoxCategoria.SelectedItem}' AND ProductModelProductDescriptionCulture.CultureID = '{language}' {onlyAvailableSql}";
                 models = connection.Query<Model>(sql).ToList();
                 foreach (Model model in models)
                 {
@@ -90,7 +98,7 @@ namespace Final_SPDVI_Project
             {
                 List<Model> models = new List<Model>();
                 string sql = $@"SELECT DISTINCT
-                            Production.ProductModel.Name, Production.ProductDescription.Description
+                            Production.ProductModel.Name, Production.ProductDescription.Description{extraInfo}
                             FROM
                             Production.Product
                             INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID
@@ -98,7 +106,7 @@ namespace Final_SPDVI_Project
                             INNER JOIN Production.ProductModel ON Production.Product.ProductModelID = Production.ProductModel.ProductModelID
                             INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID
                             INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID
-                            WHERE Production.ProductSubcategory.Name = '{comboBoxSubCategoria.SelectedItem}' AND ProductModelProductDescriptionCulture.CultureID = '{language}'";
+                            WHERE Production.ProductSubcategory.Name = '{comboBoxSubCategoria.SelectedItem}' AND ProductModelProductDescriptionCulture.CultureID = '{language}' {onlyAvailableSql}";
                 models = connection.Query<Model>(sql).ToList();
                 foreach (Model model in models)
                 {
@@ -158,7 +166,7 @@ namespace Final_SPDVI_Project
             {
                 List<Model> models = new List<Model>();
                 string sql = $@"SELECT DISTINCT
-                            Production.ProductModel.Name, Production.ProductDescription.Description
+                            Production.ProductModel.Name, Production.ProductDescription.Description{extraInfo}
                             FROM Production.Product
                             INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID
                             INNER JOIN Production.ProductCategory ON Production.ProductSubcategory.ProductCategoryID = Production.ProductCategory.ProductCategoryID
@@ -166,7 +174,7 @@ namespace Final_SPDVI_Project
                             INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID
                             INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID
                             WHERE Production.ProductSubcategory.Name = '{comboBoxSubCategoria.SelectedItem}' AND ProductModelProductDescriptionCulture.CultureID = '{language}'
-                            AND Production.Product.Style = '{comboBoxStyle.SelectedItem}'";
+                            AND Production.Product.Style = '{comboBoxStyle.SelectedItem}' {onlyAvailableSql}";
                 models = connection.Query<Model>(sql).ToList();
                 foreach (Model model in models)
                 {
@@ -185,7 +193,7 @@ namespace Final_SPDVI_Project
             {
                 List<Model> models = new List<Model>();
                 string sql = $@"SELECT DISTINCT
-                            Production.ProductModel.Name, Production.ProductDescription.Description
+                            Production.ProductModel.Name, Production.ProductDescription.Description{extraInfo}
                             FROM Production.Product
                             INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID
                             INNER JOIN Production.ProductCategory ON Production.ProductSubcategory.ProductCategoryID = Production.ProductCategory.ProductCategoryID
@@ -193,7 +201,7 @@ namespace Final_SPDVI_Project
                             INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID
                             INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID
                             WHERE Production.ProductSubcategory.Name = '{comboBoxSubCategoria.SelectedItem}' AND ProductModelProductDescriptionCulture.CultureID = '{language}'
-                            AND Production.Product.Size = '{comboBoxSize.SelectedItem}'";
+                            AND Production.Product.Size = '{comboBoxSize.SelectedItem}' {onlyAvailableSql}";
                 models = connection.Query<Model>(sql).ToList();
                 foreach (Model model in models)
                 {
@@ -212,7 +220,7 @@ namespace Final_SPDVI_Project
             {
                 List<Model> models = new List<Model>();
                 string sql = $@"SELECT DISTINCT
-                            Production.ProductModel.Name, Production.ProductDescription.Description
+                            Production.ProductModel.Name, Production.ProductDescription.Description{extraInfo}
                             FROM Production.Product
                             INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID
                             INNER JOIN Production.ProductCategory ON Production.ProductSubcategory.ProductCategoryID = Production.ProductCategory.ProductCategoryID
@@ -220,7 +228,7 @@ namespace Final_SPDVI_Project
                             INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID
                             INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID
                             WHERE Production.ProductSubcategory.Name = '{comboBoxSubCategoria.SelectedItem}' AND ProductModelProductDescriptionCulture.CultureID = '{language}'
-                            AND Production.Product.ProductLine = '{comboBoxProductLine.SelectedItem}'";
+                            AND Production.Product.ProductLine = '{comboBoxProductLine.SelectedItem}' {onlyAvailableSql}";
                 models = connection.Query<Model>(sql).ToList();
                 foreach (Model model in models)
                 {
@@ -238,7 +246,7 @@ namespace Final_SPDVI_Project
             {
                 List<Model> models = new List<Model>();
                 string sql = $@"SELECT DISTINCT
-                            Production.ProductModel.Name, Production.ProductDescription.Description
+                            Production.ProductModel.Name, Production.ProductDescription.Description{extraInfo}
                             FROM Production.Product
                             INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID
                             INNER JOIN Production.ProductCategory ON Production.ProductSubcategory.ProductCategoryID = Production.ProductCategory.ProductCategoryID
@@ -246,7 +254,7 @@ namespace Final_SPDVI_Project
                             INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID
                             INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID
                             WHERE Production.ProductSubcategory.Name = '{comboBoxSubCategoria.SelectedItem}' AND ProductModelProductDescriptionCulture.CultureID = '{language}'
-                            AND Production.Product.Class = '{comboBoxClass.SelectedItem}'";
+                            AND Production.Product.Class = '{comboBoxClass.SelectedItem}' {onlyAvailableSql}";
                 models = connection.Query<Model>(sql).ToList();
                 foreach (Model model in models)
                 {
@@ -275,7 +283,7 @@ namespace Final_SPDVI_Project
             {
                 List<Model> models = new List<Model>();
                 string sql = $@"SELECT DISTINCT
-                            Production.ProductModel.Name, Production.ProductDescription.Description, Production.Product.ListPrice
+                            Production.ProductModel.Name, Production.ProductDescription.Description{extraInfo}
                             FROM Production.Product
                             INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID
                             INNER JOIN Production.ProductCategory ON Production.ProductSubcategory.ProductCategoryID = Production.ProductCategory.ProductCategoryID
@@ -283,7 +291,32 @@ namespace Final_SPDVI_Project
                             INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID
                             INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID
                             WHERE Production.ProductSubcategory.Name = '{comboBoxSubCategoria.SelectedItem}' AND ProductModelProductDescriptionCulture.CultureID = '{language}'
-                            AND Production.Product.ListPrice BETWEEN {min} AND {max}";
+                            AND Production.Product.ListPrice BETWEEN {min} AND {max} {onlyAvailableSql}";
+                models = connection.Query<Model>(sql).ToList();
+                foreach (Model model in models)
+                {
+                    listView1.Items.Add(model.ToString());
+                }
+            }
+        }
+        private void textBoxFindByProductName_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            listView1.Items.Clear();
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                List<Model> models = new List<Model>();
+                string sql = $@"SELECT
+                            Production.ProductModel.Name, Production.ProductDescription.Description{extraInfo}
+                            FROM
+                            Production.Product
+                            INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID
+                            INNER JOIN Production.ProductCategory ON Production.ProductSubcategory.ProductCategoryID = Production.ProductCategory.ProductCategoryID
+                            INNER JOIN Production.ProductModel ON Production.Product.ProductModelID = Production.ProductModel.ProductModelID
+                            INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID
+                            INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID
+                            WHERE Production.Product.Name  LIKE '{textBox.Text}%' AND ProductModelProductDescriptionCulture.CultureID = '{language}' {onlyAvailableSql}";
                 models = connection.Query<Model>(sql).ToList();
                 foreach (Model model in models)
                 {
@@ -292,19 +325,56 @@ namespace Final_SPDVI_Project
             }
         }
 
+        private void textBoxFindByModelName_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            listView1.Items.Clear();
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                List<Model> models = new List<Model>();
+                string sql = $@"SELECT
+                            Production.ProductModel.Name, Production.ProductDescription.Description{extraInfo}
+                            FROM
+                            Production.Product
+                            INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID
+                            INNER JOIN Production.ProductCategory ON Production.ProductSubcategory.ProductCategoryID = Production.ProductCategory.ProductCategoryID
+                            INNER JOIN Production.ProductModel ON Production.Product.ProductModelID = Production.ProductModel.ProductModelID
+                            INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID
+                            INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID
+                            WHERE Production.ProductModel.Name  LIKE '{textBox.Text}%' AND ProductModelProductDescriptionCulture.CultureID = '{language}' {onlyAvailableSql}";
+                models = connection.Query<Model>(sql).ToList();
+                foreach (Model model in models)
+                {
+                    listView1.Items.Add(model.ToString());
+                }
+            }
+        }
+   
+        private void availableProductsButton_Click(object sender, EventArgs e)
+        {
+            onlyAvailableSql = "AND Production.Product.SellEndDate IS NULL";
+            extraInfo = "";
+        }
+
+        private void allProductsButton_Click(object sender, EventArgs e)
+        {
+            onlyAvailableSql = "";
+            extraInfo = ", Production.Product.SellStartDate, Production.Product.SellEndDate";
+        }
+
         public static List<Model> GetModels()
         {
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 List<Model> models = new List<Model>();
-                string sql = $@"SELECT DISTINCT Production.ProductModel.Name, Production.ProductDescription.Description
+                string sql = $@"SELECT DISTINCT Production.ProductModel.Name, Production.ProductDescription.Description{extraInfo}
                             FROM Production.Product 
                             INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID 
                             INNER JOIN Production.ProductCategory ON Production.ProductSubcategory.ProductCategoryID = Production.ProductCategory.ProductCategoryID 
                             INNER JOIN Production.ProductModel ON Production.Product.ProductModelID = Production.ProductModel.ProductModelID 
                             INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID 
                             INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID 
-                            WHERE ProductModelProductDescriptionCulture.CultureID = '{language}' AND Product.ProductModelID IS NOT NULL";
+                            WHERE ProductModelProductDescriptionCulture.CultureID = '{language}' AND Product.ProductModelID IS NOT NULL {onlyAvailableSql}";
                 models = connection.Query<Model>(sql).ToList();
                 return models;
             }
@@ -402,6 +472,5 @@ namespace Final_SPDVI_Project
                 return classes;
             }
         }
-
     }
 }
