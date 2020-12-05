@@ -44,6 +44,8 @@
             this.textBoxFindByProductName = new System.Windows.Forms.TextBox();
             this.labelFindByProductName = new System.Windows.Forms.Label();
             this.groupBoxFilters = new System.Windows.Forms.GroupBox();
+            this.label1labelFindByModelName = new System.Windows.Forms.Label();
+            this.textBoxFindByModelName = new System.Windows.Forms.TextBox();
             this.applyPriceFilterButton = new System.Windows.Forms.Button();
             this.maxPriceLabel = new System.Windows.Forms.Label();
             this.maxPriceTextBox = new System.Windows.Forms.TextBox();
@@ -54,8 +56,6 @@
             this.labelLanguage = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
             this.PRODUCTS = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label1labelFindByModelName = new System.Windows.Forms.Label();
-            this.textBoxFindByModelName = new System.Windows.Forms.TextBox();
             this.availableProductsButton = new System.Windows.Forms.Button();
             this.allProductsButton = new System.Windows.Forms.Button();
             this.groupBoxFilters.SuspendLayout();
@@ -227,6 +227,23 @@
             this.groupBoxFilters.TabStop = false;
             this.groupBoxFilters.Text = "Filters:";
             // 
+            // label1labelFindByModelName
+            // 
+            this.label1labelFindByModelName.AutoSize = true;
+            this.label1labelFindByModelName.Location = new System.Drawing.Point(18, 506);
+            this.label1labelFindByModelName.Name = "label1labelFindByModelName";
+            this.label1labelFindByModelName.Size = new System.Drawing.Size(139, 17);
+            this.label1labelFindByModelName.TabIndex = 23;
+            this.label1labelFindByModelName.Text = "Find by Model name:";
+            // 
+            // textBoxFindByModelName
+            // 
+            this.textBoxFindByModelName.Location = new System.Drawing.Point(21, 526);
+            this.textBoxFindByModelName.Name = "textBoxFindByModelName";
+            this.textBoxFindByModelName.Size = new System.Drawing.Size(163, 22);
+            this.textBoxFindByModelName.TabIndex = 22;
+            this.textBoxFindByModelName.TextChanged += new System.EventHandler(this.textBoxFindByModelName_TextChanged);
+            // 
             // applyPriceFilterButton
             // 
             this.applyPriceFilterButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
@@ -312,32 +329,16 @@
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(302, 57);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1199, 413);
+            this.listView1.Size = new System.Drawing.Size(1200, 413);
             this.listView1.TabIndex = 21;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
             // 
             // PRODUCTS
             // 
             this.PRODUCTS.Text = "PRODUCTS:";
-            this.PRODUCTS.Width = 600;
-            // 
-            // label1labelFindByModelName
-            // 
-            this.label1labelFindByModelName.AutoSize = true;
-            this.label1labelFindByModelName.Location = new System.Drawing.Point(18, 506);
-            this.label1labelFindByModelName.Name = "label1labelFindByModelName";
-            this.label1labelFindByModelName.Size = new System.Drawing.Size(139, 17);
-            this.label1labelFindByModelName.TabIndex = 23;
-            this.label1labelFindByModelName.Text = "Find by Model name:";
-            // 
-            // textBoxFindByModelName
-            // 
-            this.textBoxFindByModelName.Location = new System.Drawing.Point(21, 526);
-            this.textBoxFindByModelName.Name = "textBoxFindByModelName";
-            this.textBoxFindByModelName.Size = new System.Drawing.Size(163, 22);
-            this.textBoxFindByModelName.TabIndex = 22;
-            this.textBoxFindByModelName.TextChanged += new System.EventHandler(this.textBoxFindByModelName_TextChanged);
+            this.PRODUCTS.Width = 1200;
             // 
             // availableProductsButton
             // 

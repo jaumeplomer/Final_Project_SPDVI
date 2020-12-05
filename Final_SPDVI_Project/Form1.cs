@@ -52,6 +52,8 @@ namespace Final_SPDVI_Project
             comboBoxSize.Text = "";
             comboBoxProductLine.Text = "";
             comboBoxClass.Text = "";
+            textBoxFindByModelName.Text = "";
+            textBoxFindByProductName.Text = "";
         }
 
         private void comboBoxLanguage_SelectedIndexChanged(object sender, EventArgs e)
@@ -332,7 +334,7 @@ namespace Final_SPDVI_Project
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 List<Model> models = new List<Model>();
-                string sql = $@"SELECT
+                string sql = $@"SELECT DISTINCT
                             Production.ProductModel.Name, Production.ProductDescription.Description{extraInfo}
                             FROM
                             Production.Product
@@ -471,6 +473,12 @@ namespace Final_SPDVI_Project
                 classes = connection.Query<String>(sql).ToList();
                 return classes;
             }
+        }
+
+        private void listView1_DoubleClick(object sender, EventArgs e)
+        {
+            ProductInfoForm form = new ProductInfoForm();
+            form.Show();
         }
     }
 }
