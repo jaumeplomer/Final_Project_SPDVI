@@ -67,7 +67,7 @@ namespace Final_SPDVI_Project
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 List<Model> models = new List<Model>();
-                string sql = $@"SELECT DISTINCT
+                string sql = $@"SELECT
                             Production.ProductModel.Name, Production.ProductDescription.Description{extraInfo}
                             FROM
                             Production.Product
@@ -99,7 +99,7 @@ namespace Final_SPDVI_Project
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 List<Model> models = new List<Model>();
-                string sql = $@"SELECT DISTINCT
+                string sql = $@"SELECT
                             Production.ProductModel.Name, Production.ProductDescription.Description{extraInfo}
                             FROM
                             Production.Product
@@ -167,7 +167,7 @@ namespace Final_SPDVI_Project
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 List<Model> models = new List<Model>();
-                string sql = $@"SELECT DISTINCT
+                string sql = $@"SELECT
                             Production.ProductModel.Name, Production.ProductDescription.Description{extraInfo}
                             FROM Production.Product
                             INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID
@@ -194,7 +194,7 @@ namespace Final_SPDVI_Project
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 List<Model> models = new List<Model>();
-                string sql = $@"SELECT DISTINCT
+                string sql = $@"SELECT
                             Production.ProductModel.Name, Production.ProductDescription.Description{extraInfo}
                             FROM Production.Product
                             INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID
@@ -221,7 +221,7 @@ namespace Final_SPDVI_Project
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 List<Model> models = new List<Model>();
-                string sql = $@"SELECT DISTINCT
+                string sql = $@"SELECT
                             Production.ProductModel.Name, Production.ProductDescription.Description{extraInfo}
                             FROM Production.Product
                             INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID
@@ -247,7 +247,7 @@ namespace Final_SPDVI_Project
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 List<Model> models = new List<Model>();
-                string sql = $@"SELECT DISTINCT
+                string sql = $@"SELECT
                             Production.ProductModel.Name, Production.ProductDescription.Description{extraInfo}
                             FROM Production.Product
                             INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID
@@ -284,7 +284,7 @@ namespace Final_SPDVI_Project
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 List<Model> models = new List<Model>();
-                string sql = $@"SELECT DISTINCT
+                string sql = $@"SELECT
                             Production.ProductModel.Name, Production.ProductDescription.Description{extraInfo}
                             FROM Production.Product
                             INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID
@@ -334,7 +334,7 @@ namespace Final_SPDVI_Project
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 List<Model> models = new List<Model>();
-                string sql = $@"SELECT DISTINCT
+                string sql = $@"SELECT
                             Production.ProductModel.Name, Production.ProductDescription.Description{extraInfo}
                             FROM
                             Production.Product
@@ -477,7 +477,10 @@ namespace Final_SPDVI_Project
 
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
-            ProductInfoForm form = new ProductInfoForm();
+            string info = listView1.SelectedItems[0].Text;
+            char separador;
+            string[] a = info.Split(separador = '|');          
+            ProductInfoForm form = new ProductInfoForm(a[0]);           
             form.Show();
         }
     }
