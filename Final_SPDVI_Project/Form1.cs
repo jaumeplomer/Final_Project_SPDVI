@@ -21,9 +21,10 @@ namespace Final_SPDVI_Project
         public static float max = 4000;
         public static string onlyAvailableSql = "";
         public static string extraInfo = "";
-        public listViewProducts() 
+        public static string safeInfoProductName;
+        public listViewProducts()
         {
-            InitializeComponent(); 
+            InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -34,7 +35,7 @@ namespace Final_SPDVI_Project
             foreach (String categoria in categories)
             {
                 comboBoxCategoria.Items.Add(categoria);
-            }         
+            }
         }
 
         private void buttonLoadData_Click(object sender, EventArgs e)
@@ -114,7 +115,7 @@ namespace Final_SPDVI_Project
                 {
                     listView1.Items.Add(model.ToString());
                 }
-    
+
                 comboBoxStyle.Items.Clear();
                 List<String> styles = new List<string>();
                 styles = getStyle();
@@ -351,7 +352,7 @@ namespace Final_SPDVI_Project
                 }
             }
         }
-   
+
         private void availableProductsButton_Click(object sender, EventArgs e)
         {
             onlyAvailableSql = "AND Production.Product.SellEndDate IS NULL";
@@ -479,9 +480,35 @@ namespace Final_SPDVI_Project
         {
             string info = listView1.SelectedItems[0].Text;
             char separador;
-            string[] a = info.Split(separador = '|');          
-            ProductInfoForm form = new ProductInfoForm(a[0]);           
-            form.Show();
+            string[] a = info.Split(separador = '|');
+
+
+            safeInfoProductName = a[0].Replace("'", "''");
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                List<Model> models = new List<Model>();
+                string sql = $@"SELECT
+                            Production.ProductModel.Name, Production.ProductDescription.Description,
+                            Production.Product.Name AS ProductName, Production.Product.ProductNumber AS ProNumber, Production.Product.Color AS Color, Production.Product.ListPrice AS Price, Production.Product.Size AS Size,
+                            Production.Product.ProductLine AS ProLine, Production.Product.Class AS Clase, Production.Product.Style AS Style,
+                            Production.ProductCategory.Name AS Cat,
+                            Production.ProductSubcategory.Name AS SubCat
+                            FROM
+                            Production.Product
+                            INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID
+                            INNER JOIN Production.ProductCategory ON Production.ProductSubcategory.ProductCategoryID = Production.ProductCategory.ProductCategoryID
+                            INNER JOIN Production.ProductModel ON Production.Product.ProductModelID = Production.ProductModel.ProductModelID
+                            INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID
+                            INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID
+                            WHERE Production.ProductModel.Name = '{safeInfoProductName}' AND (ProductModelProductDescriptionCulture.CultureID = '{language}' OR Production.Product.Class = '{comboBoxClass.Text}' OR Production.Product.Style = '{comboBoxStyle.Text}'
+                            OR Production.Product.Size = '{comboBoxSize.Text}' OR Production.Product.ProductLine = '{comboBoxProductLine.Text}')";
+                models = connection.Query<Model>(sql).ToList();
+                Model model = new Model();
+                model = models[0];
+
+                ProductInfoForm form = new ProductInfoForm(model);
+                form.Show();
+            }
         }
     }
 }
