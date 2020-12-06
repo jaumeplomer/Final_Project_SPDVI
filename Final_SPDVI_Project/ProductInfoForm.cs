@@ -17,6 +17,7 @@ namespace Final_SPDVI_Project
     {
         public static string connectionString = ConfigurationManager.ConnectionStrings["AdventureWorksDB"].ConnectionString;
         public static string infoProductName = "";
+        public static string safeInfoProductName;
         public ProductInfoForm()
         {
             InitializeComponent();           
@@ -25,6 +26,7 @@ namespace Final_SPDVI_Project
         {
             InitializeComponent();
             infoProductName = info;
+            safeInfoProductName = infoProductName.Replace("'", "''");
         }
 
         private void ProductInfoForm_Load(object sender, EventArgs e)
@@ -46,7 +48,7 @@ namespace Final_SPDVI_Project
                             INNER JOIN Production.ProductModel ON Production.Product.ProductModelID = Production.ProductModel.ProductModelID
                             INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID
                             INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID
-                            WHERE Production.ProductModel.Name = '{infoProductName}'";
+                            WHERE Production.ProductModel.Name = '{safeInfoProductName}'";
                 models = connection.Query<Model>(sql).ToList();
                 Model model = new Model();
                 model = models[0];
